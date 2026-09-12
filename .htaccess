@@ -1,0 +1,54 @@
+# ── Meccora marketing site ───────────────────────────────────────────────
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Canonical host: force non-www + https (LIVE only; conditions never match locally)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} \.meccora\.com$ [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Pretty URLs: serve /slug from /slug.php when that file exists.
+  # Never touches real files or directories, so assets and index.php are safe.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(.+?)/?$ $1.php [L]
+
+  # Unknown page paths (no real file, no .php twin, not an asset) → styled 404.
+  # Works at the domain root and in a subfolder; 404.php sends the 404 status.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.(css|js|png|jpe?g|gif|svg|webp|ico|woff2?|map|txt|xml|json|pdf)$ [NC]
+  RewriteRule ^ 404.php [L]
+</IfModule>
+
+# Fallback for genuine asset 404s (e.g. a missing image)
+ErrorDocument 404 /404.php
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png              "access plus 30 days"
+  ExpiresByType image/webp             "access plus 30 days"
+  ExpiresByType image/svg+xml          "access plus 30 days"
+  ExpiresByType image/x-icon           "access plus 30 days"
+  ExpiresByType text/css               "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html              "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>

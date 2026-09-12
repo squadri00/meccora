@@ -1,0 +1,6 @@
+# Local-only / not part of the deployed site
+archive/
+meccora new.zip
+*.zip
+.DS_Store
+Thumbs.db

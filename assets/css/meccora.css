@@ -1,0 +1,220 @@
+/* =====================================================
+   MECCORA — overrides layered on top of theme.css
+   (Nexora theme, re-themed to Meccora purple #393193)
+   ===================================================== */
+
+/* ---- Brand logo ---- */
+.brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+.navbar-nexora.scrolled .brand-logo { height: 38px; }
+/* Knockout the flat-black logo to white for the dark footer / dark headers */
+.brand-logo--invert { filter: brightness(0) invert(1); opacity: 0.95; }
+
+/* ---- Skip link ---- */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2000;
+  background: var(--n-primary);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: var(--n-radius-sm);
+  font-family: var(--n-font-display);
+  font-weight: 600;
+}
+
+/* ---- Sub-page header: moody grunge-textured dark panel ---- */
+.page-header {
+  background-color: #1b1442;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 130% at 82% -10%, rgba(129, 96, 240, 0.34) 0%, transparent 46%),
+    radial-gradient(95% 120% at -5% 110%, rgba(57, 49, 147, 0.45) 0%, transparent 55%),
+    linear-gradient(158deg, #150d34 0%, #241a52 52%, #2f2269 100%);
+  background-size: 240px 240px, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-blend-mode: overlay, normal, normal, normal;
+}
+.page-header::before { display: none; }   /* our layered glows replace the theme's single one */
+
+/* ---- Navbar over dark page headers (before scroll, menu closed) ----
+   The moment the mobile menu opens (.menu-open, added by main.js) the navbar
+   gets a solid background — see below — so these "float over the dark header"
+   styles must stand down too, or white text/logo would sit on a white bar. ---- */
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .nav-link { color: rgba(255,255,255,0.9) !important; }
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .nav-link:hover,
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .nav-link.active {
+  color: #fff !important;
+  background: rgba(255,255,255,0.12);
+}
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .brand-logo { filter: brightness(0) invert(1); }
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .navbar-toggler-custom { background: rgba(255,255,255,0.15); }
+.has-page-header .navbar-nexora:not(.scrolled):not(.menu-open) .navbar-toggler-custom .bar { background: #fff; }
+@media (max-width: 991.98px) {
+  /* mobile menu panel is light — keep links dark once expanded */
+  .has-page-header .navbar-nexora .navbar-collapse.show .nav-link { color: var(--n-navy) !important; }
+}
+
+/* ---- Mobile menu open: force a solid navbar background ----
+   Before scrolling, .navbar-nexora is fully transparent (by theme design,
+   so the hero shows through it). That's fine while the menu is closed, but
+   once the hamburger opens the dropdown there is nothing behind the nav
+   links except page content — they rendered unreadable, floating over the
+   hero/hero-header with no backing. Match the site's own .scrolled look
+   for as long as the mobile menu is open, regardless of scroll position. ---- */
+.navbar-nexora.menu-open {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--n-shadow-sm);
+}
+
+/* ---- Hero: product screenshot instead of the mock card ---- */
+.hero-shot {
+  border-radius: var(--n-radius-lg);
+  box-shadow: var(--n-shadow-lg);
+  border: 1px solid var(--n-border);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hero .ratio { border-radius: var(--n-radius-lg); box-shadow: var(--n-shadow-lg); overflow: hidden; border: 1px solid var(--n-border); }
+
+/* ---- Belt-and-suspenders against horizontal scroll/shift ----
+   theme.css already sets overflow-x:hidden on body, but some mobile browsers
+   still allow the document/viewport itself to rubber-band sideways if any
+   element's layout box escapes it (this is what caused the "page shifts left"
+   bug — see the g-5 -> gy-5 fix on .row elements below/elsewhere). Locking
+   html too closes that gap for good. ---- */
+html { overflow-x: hidden; max-width: 100%; }
+body { max-width: 100%; }
+
+/* ---- Images never overflow their column ---- */
+img { max-width: 100%; height: auto; }
+
+/* ---- Cards stretch only when asked (.h-100), not by default.
+       The theme sets height:100% globally, which balloons a card that is the
+       sole/last child of a stretched single column. Opt in per grid instead. ---- */
+.card-premium { height: auto; }
+
+/* ---- "Browser frame" wrapper for product screenshots ---- */
+.shot-frame {
+  border-radius: var(--n-radius-md);
+  border: 1px solid #d9d5ea;
+  box-shadow: var(--n-shadow-lg);
+  overflow: hidden;
+  background: #fff;
+}
+.hero .shot-frame { box-shadow: 0 30px 60px rgba(32, 22, 74, 0.18); }
+
+/* ---- Framed video embeds ---- */
+.ratio.ratio-16x9 {
+  border-radius: var(--n-radius-md);
+  overflow: hidden;
+  box-shadow: var(--n-shadow-md);
+  border: 1px solid var(--n-border);
+  background: #000;
+}
+.hero .ratio.ratio-16x9 { box-shadow: var(--n-shadow-lg); }
+.shot-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--n-bg);
+  border-bottom: 1px solid var(--n-border);
+}
+.shot-frame__bar span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #cfcbe0; display: block;
+}
+.shot-frame img { display: block; width: 100%; height: auto; }
+
+/* ---- List with check icons (feature bullets) ---- */
+.list-check li i.bi { line-height: 1; }
+
+/* ---- Stat number: gradient variant ---- */
+.stat-number.gradient {
+  background: var(--n-gradient-primary);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* ---- FAQ accordion: chevron + spacing ---- */
+.accordion-custom .accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23393193'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'/%3e%3c/svg%3e");
+}
+.faq-group + .faq-group { margin-top: 4rem; }
+.faq-group__label {
+  font-family: var(--n-font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--n-navy);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--n-primary);
+}
+.faq-group__label::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--n-gradient-primary);
+  margin-right: 0.65rem;
+  vertical-align: middle;
+}
+@media (max-width: 575.98px) {
+  .faq-group__label { font-size: 1.3rem; }
+}
+
+/* Slightly larger, more prominent question text */
+.accordion-custom .accordion-button { font-size: 1.05rem; }
+
+/* ---- Legal / long-form content ---- */
+.legal-content { max-width: 760px; }
+.legal-content h2 { font-size: 1.35rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+.legal-content h3 { font-size: 1.05rem; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+.legal-content p, .legal-content li { color: var(--n-slate); }
+.legal-content ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+.legal-content li { margin-bottom: 0.4rem; }
+.legal-content .lead-meta { font-size: 0.9rem; color: var(--n-slate-light); }
+
+/* ---- Value / benefit row ---- */
+.benefit-icon {
+  width: 44px; height: 44px; border-radius: var(--n-radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--n-bg-alt); color: var(--n-primary);
+  font-size: 1.25rem; flex-shrink: 0;
+}
+
+/* ---- Small trust badges under CTAs ---- */
+.trust-inline {
+  display: flex; flex-wrap: wrap; gap: 1.25rem;
+  font-size: 0.85rem; color: var(--n-slate);
+  font-weight: 500;
+}
+.trust-inline span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.trust-inline i { color: var(--n-success); }
+
+/* ---- Reveal-on-scroll: only hide when JS is present (progressive enhancement).
+       Without JS, or if the observer misbehaves, content is always visible. ---- */
+.reveal { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; transform: translateY(24px); }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---- Anchor offset so #ids clear the fixed navbar ---- */
+:target { scroll-margin-top: 100px; }
+
+/* ---- Reduce hero top gap slightly on very small screens ---- */
+@media (max-width: 575.98px) {
+  .hero { padding-top: 6.5rem; }
+}
