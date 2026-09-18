@@ -89,6 +89,19 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(revealAll, 1000);
   }
 
+  /* ---------- Video facades: load the real player only on click ---------- */
+  document.querySelectorAll('.video-facade').forEach((facade) => {
+    facade.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(facade.dataset.videoId) + '?rel=0&showinfo=0&autoplay=1';
+      iframe.title = facade.getAttribute('aria-label') || 'Video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.border = '0';
+      facade.replaceWith(iframe);
+    });
+  });
+
   /* ---------- Back to top button ---------- */
   const backToTop = document.querySelector('.back-to-top');
   if (backToTop) {

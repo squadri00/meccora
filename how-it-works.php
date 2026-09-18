@@ -38,7 +38,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/customers.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/customers.webp')) ?>" width="1600" height="1067"
                alt="Meccora customers list for a shop, ready for import or manual entry">
         </div>
       </div>
@@ -62,7 +62,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal order-lg-1">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/vehicles.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/vehicles.webp')) ?>" width="1600" height="1067"
                alt="Meccora vehicles list populated after a CSV import">
         </div>
       </div>
@@ -86,7 +86,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/deferred-work.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/deferred-work.webp')) ?>" width="1600" height="1067"
                alt="Deferred work captured from logged services, with estimated values">
         </div>
       </div>
@@ -110,7 +110,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal order-lg-1">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/dashboard.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/dashboard.webp')) ?>" width="1600" height="1067"
                alt="Meccora dashboard with reminders due, deferred work and pipeline revenue">
         </div>
       </div>
@@ -131,10 +131,13 @@ require __DIR__ . '/partials/page-header.php';
     <div class="row justify-content-center reveal">
       <div class="col-lg-9">
         <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/I3OTcjoSRm0?rel=0&showinfo=0"
-                  title="Meccora Workshop Manager overview" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+          <button type="button" class="video-facade" data-video-id="I3OTcjoSRm0"
+                  aria-label="Play Meccora Workshop Manager overview"
+                  style="background-image:url('https://i.ytimg.com/vi/I3OTcjoSRm0/hqdefault.jpg')">
+            <span class="play-btn" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
         </div>
       </div>
     </div>

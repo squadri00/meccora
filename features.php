@@ -38,7 +38,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/reminders.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/reminders.webp')) ?>" width="1600" height="1067"
                alt="Meccora reminders list with customer, vehicle, service, due date and delivery status columns">
         </div>
       </div>
@@ -67,7 +67,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal order-lg-1">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/deferred-work.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/deferred-work.webp')) ?>" width="1600" height="1067"
                alt="Meccora deferred work list showing declined jobs, flagged dates and estimated values">
         </div>
       </div>
@@ -95,7 +95,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/vehicles.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/vehicles.webp')) ?>" width="1600" height="1067"
                alt="Meccora vehicles list with make, model, year, customer and last service">
         </div>
       </div>
@@ -124,7 +124,7 @@ require __DIR__ . '/partials/page-header.php';
       <div class="col-lg-6 reveal order-lg-1">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/reports-pipeline.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/reports-pipeline.webp')) ?>" width="1600" height="1067"
                alt="Meccora pipeline report showing projected revenue from due services and deferred work">
         </div>
       </div>

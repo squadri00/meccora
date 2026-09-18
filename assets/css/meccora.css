@@ -119,6 +119,33 @@ img { max-width: 100%; height: auto; }
   background: #000;
 }
 .hero .ratio.ratio-16x9 { box-shadow: var(--n-shadow-lg); }
+
+/* Click-to-load video facade: fills the .ratio box (Bootstrap positions
+   any direct child absolutely/full-size), shows a thumbnail + play icon
+   until clicked. See index.php / assets/js/main.js. */
+.video-facade {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-facade .play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.72);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.video-facade:hover .play-btn { background: var(--n-primary); transform: scale(1.08); }
 .shot-frame__bar {
   display: flex;
   align-items: center;

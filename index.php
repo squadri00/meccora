@@ -49,9 +49,15 @@ require __DIR__ . '/partials/header.php';
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="shot-frame reveal">
+        <!-- No .reveal here: this is the hero screenshot, visible the
+             instant the page loads -- animating it in only delayed LCP.
+             Also swapped to a resized WebP (2880x1920 PNG -> 1600x1067
+             WebP, 517 KB -> 110 KB): the column renders it at well under
+             1600px wide, so the original was ~5x more pixels than any
+             browser could use. -->
+        <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/dashboard.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/dashboard.webp')) ?>" width="1600" height="1067"
                alt="Meccora dashboard showing customer count, registered vehicles, estimated pipeline revenue, reminders due and deferred work">
         </div>
       </div>
@@ -63,22 +69,32 @@ require __DIR__ . '/partials/header.php';
 <section class="section-sm bg-white border-bottom">
   <div class="container">
     <div class="row g-4 g-lg-5 justify-content-center">
+      <!-- Click-to-load facades, not live iframes: a real YouTube embed
+           boots its player script on every pageview whether anyone
+           watches or not. assets/js/main.js swaps in the real iframe
+           (autoplay) only when the button is clicked. -->
       <div class="col-md-6 reveal">
         <div class="ratio ratio-16x9 mb-3">
-          <iframe src="https://www.youtube.com/embed/I3OTcjoSRm0?rel=0&showinfo=0"
-                  title="Meccora Introduction" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+          <button type="button" class="video-facade" data-video-id="I3OTcjoSRm0"
+                  aria-label="Play Meccora Introduction"
+                  style="background-image:url('https://i.ytimg.com/vi/I3OTcjoSRm0/hqdefault.jpg')">
+            <span class="play-btn" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
         </div>
         <h2 class="h5 mb-0">Meccora Introduction</h2>
         <p class="mb-0 small text-slate">A two-minute overview of how the platform works.</p>
       </div>
       <div class="col-md-6 reveal">
         <div class="ratio ratio-16x9 mb-3">
-          <iframe src="https://www.youtube.com/embed/Yz0Z60RmdWw?rel=0&showinfo=0"
-                  title="Meccora QR Registration" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+          <button type="button" class="video-facade" data-video-id="Yz0Z60RmdWw"
+                  aria-label="Play Meccora QR Registration"
+                  style="background-image:url('https://i.ytimg.com/vi/Yz0Z60RmdWw/hqdefault.jpg')">
+            <span class="play-btn" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
         </div>
         <h2 class="h5 mb-0">QR Self-Registration</h2>
         <p class="mb-0 small text-slate">How customers add themselves and their vehicle at the counter.</p>
@@ -94,7 +110,7 @@ require __DIR__ . '/partials/header.php';
       <div class="col-lg-6 reveal">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/reminders.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/reminders.webp')) ?>" width="1600" height="1067"
                alt="Meccora reminders screen listing upcoming service reminders with due dates and delivery status">
         </div>
       </div>
@@ -184,7 +200,7 @@ require __DIR__ . '/partials/header.php';
       <div class="col-lg-6 reveal order-lg-2">
         <div class="shot-frame">
           <div class="shot-frame__bar"><span></span><span></span><span></span></div>
-          <img src="<?= e(asset('img/screenshots/deferred-work.png')) ?>" width="2880" height="1920"
+          <img src="<?= e(asset('img/screenshots/deferred-work.webp')) ?>" width="1600" height="1067"
                alt="Meccora deferred work list showing declined jobs, the vehicle, when it was flagged and its estimated value">
         </div>
       </div>
