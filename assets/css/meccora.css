@@ -245,3 +245,7 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 575.98px) {
   .hero { padding-top: 6.5rem; }
 }
+
+/* ---- Back-to-top: moved off the bottom-right corner so it doesn't sit
+       under/behind the Chantley chat widget bubble, which lives there. ---- */
+.back-to-top { left: 2rem; right: auto; }
