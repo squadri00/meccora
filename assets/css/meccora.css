@@ -246,6 +246,9 @@ img { max-width: 100%; height: auto; }
   .hero { padding-top: 6.5rem; }
 }
 
-/* ---- Back-to-top: moved off the bottom-right corner so it doesn't sit
-       under/behind the Chantley chat widget bubble, which lives there. ---- */
-.back-to-top { left: 2rem; right: auto; }
+/* ---- Back-to-top: parked immediately left of the Chantley chat widget
+       bubble instead of overlapping it. Widget is a fixed 56x56 button at
+       right:20px / bottom:20px (confirmed on-site, same on mobile and
+       desktop) — 92px clears its width + a 16px gap; 24px centers our
+       48px button against its 56px height. ---- */
+.back-to-top { left: auto; right: 92px; bottom: 24px; }
